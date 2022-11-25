@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   Routes,
   Route,
@@ -6,12 +6,19 @@ import {
   Link,
   useLocation,
   useNavigate
-} from 'react-router-dom';
-import Layout from './layouts/Layout';
+} from "react-router-dom";
+import Layout from "./layouts/Layout";
+import { useCookies } from "react-cookie";
+import { RandomName } from "./utils";
 
-import './App.css';
+import "./App.css";
 
 export default function App() {
+  const [cookies, setCookie] = useCookies([]);
+  if (!cookies.catlover_id) {
+    setCookie("catlover_id", RandomName(), { path: "/" });
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -49,12 +56,12 @@ function Dashboard() {
   );
 }
 
-function NoMatch() {
+function NoMatch(props) {
   return (
     <div>
       <h2>Nothing to see here!</h2>
       <p>
-        <Link to="/">Go to the home page</Link>
+        <Link to="/">Go to the home page {document.cookie} nebo react</Link>
       </p>
     </div>
   );

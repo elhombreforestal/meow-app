@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState } from "react";
 import {
   AppBar,
   Container,
@@ -9,18 +9,18 @@ import {
   Toolbar,
   SvgIcon,
   IconButton
-} from '@mui/material/';
+} from "@mui/material/";
 import {
   Outlet,
   Link as RouteLink,
   useLocation,
   useNavigate
-} from 'react-router-dom';
+} from "react-router-dom";
 
 const pages = [
-  { to: '/', txt: 'Kittyfall' },
-  { to: '/breeds', txt: 'Breeds' },
-  { to: '/favorites', txt: 'Favorites' }
+  { to: "/", txt: "Kittyfall" },
+  { to: "/breeds", txt: "Breeds" },
+  { to: "/favorites", txt: "Favorites" }
 ];
 
 function CatIcon(props) {
@@ -59,10 +59,10 @@ const Layout = () => {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <CatIcon
-              sx={{ color: '#fff', display: { xs: 'none', md: 'flex' } }}
+              sx={{ color: "#fff", display: { xs: "none", md: "flex" } }}
             />
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -77,18 +77,18 @@ const Layout = () => {
                 id="menu-appbar"
                 anchorEl={anchorElNav}
                 anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left'
+                  vertical: "bottom",
+                  horizontal: "left"
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left'
+                  vertical: "top",
+                  horizontal: "left"
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'block', md: 'none' }
+                  display: { xs: "block", md: "none" }
                 }}
               >
                 {pages.map((page) => (
@@ -100,9 +100,9 @@ const Layout = () => {
                 ))}
               </Menu>
             </Box>
-            <CatIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <CatIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {pages.map((page) => (
                 <Link key={page.txt} component={RouteLink} to={page.to}>
                   {page.txt}
