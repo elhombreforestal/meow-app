@@ -5,9 +5,11 @@ import {
   Outlet,
   Link,
   useLocation,
-  useNavigate
+  useNavigate,
+  useParams
 } from "react-router-dom";
-import Layout from "./layouts/Layout";
+import { Layout, Breeds, Favorites, RandomFeed } from "./layouts";
+import { Modal } from "./components";
 import { useCookies } from "react-cookie";
 import { RandomName } from "./utils";
 
@@ -18,17 +20,33 @@ export default function App() {
   if (!cookies.catlover_id) {
     setCookie("catlover_id", RandomName(), { path: "/" });
   }
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="dashboard" element={<Dashboard />} />
+    <>
+      <Routes location={background || location}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<RandomFeed />} />
+          <Route path="/" element={<RandomFeed />}>
+            <Route path="img/:id" element={<Modal />} />
+          </Route>
+          <Route path="breeds" element={<Breeds />}>
+            <Route path=":id" element={<Modal />} />
+          </Route>
+          <Route path="favorites" element={<Favorites />}>
+            <Route path=":id" element={<Modal />} />
+          </Route>
 
-        <Route path="*" element={<NoMatch />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<NoMatch />} />
+        </Route>
+      </Routes>
+      {background && (
+        <Routes>
+          <Route path="modal" element={<Modal />} />
+        </Routes>
+      )}
+    </>
   );
 }
 
@@ -40,18 +58,24 @@ function Home() {
   );
 }
 
-function About() {
+function Favs() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { id } = useParams();
   return (
     <div>
-      <h2>About</h2>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
+      <br />
+      <br />
+      <h2>Favs</h2>
+      <p>Show Modal: {id}</p>
+      {id && <button onClick={() => navigate(-1)}>Close</button>}
+      <br />
+      <Link to="modal" state={{ background: location }}>
+        Open Modal
+      </Link>
+      <br />
+      <Link to="id2">Open inner Modal</Link>
+      <Outlet />
     </div>
   );
 }

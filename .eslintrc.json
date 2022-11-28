@@ -29,10 +29,13 @@
             "semi": true
           }
         ],
+        "linebreak-style": "off",
+        "global-require": "off",
+        "eslint linebreak-style": "off",
         "prefer-const": "error",
-        "no-unused-vars": "off",
+        "no-unused-vars": "warn",
         "no-console": "warn",
-        "no-nested-ternary": "error",
+        "no-nested-ternary": "off",
         "react/jsx-no-target-blank": [
           "error",
           {
