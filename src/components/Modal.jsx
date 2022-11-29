@@ -1,5 +1,11 @@
 import { React, useState } from "react";
-import { Dialog, DialogContent, DialogContentText } from "@mui/material/";
+import {
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  ImageListItemBar,
+  IconButton
+} from "@mui/material/";
 import { useNavigate, useParams } from "react-router-dom";
 import { Favorite } from "../icons";
 
@@ -19,6 +25,17 @@ export default function Modal() {
       <DialogContent>
         <DialogContentText>{id}</DialogContentText>
       </DialogContent>
+      <ImageListItemBar
+        position="top"
+        sx={{
+          background: "none"
+        }}
+        actionIcon={
+          <IconButton>
+            <Favorite />
+          </IconButton>
+        }
+      />
     </Dialog>
   );
 }

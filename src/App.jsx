@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Routes,
-  Route,
-  Outlet,
-  Link,
-  useLocation,
-  useNavigate,
-  useParams
-} from "react-router-dom";
+import { Routes, Route, Link, useLocation } from "react-router-dom";
 import { Layout, Breeds, Favorites, RandomFeed } from "./layouts";
 import { Modal } from "./components";
 import { useCookies } from "react-cookie";
@@ -47,36 +39,6 @@ export default function App() {
         </Routes>
       )}
     </>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
-}
-
-function Favs() {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const { id } = useParams();
-  return (
-    <div>
-      <br />
-      <br />
-      <h2>Favs</h2>
-      <p>Show Modal: {id}</p>
-      {id && <button onClick={() => navigate(-1)}>Close</button>}
-      <br />
-      <Link to="modal" state={{ background: location }}>
-        Open Modal
-      </Link>
-      <br />
-      <Link to="id2">Open inner Modal</Link>
-      <Outlet />
-    </div>
   );
 }
 
